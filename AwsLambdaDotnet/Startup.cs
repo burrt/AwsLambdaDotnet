@@ -1,6 +1,7 @@
-﻿using AwsLambdaDotnet.Configuration;
+using AwsLambdaDotnet.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Enrichers.Sensitive;
 
@@ -36,7 +37,9 @@ namespace AwsLambdaDotnet
                         })
                         .CreateLogger();
 
-                    builder.AddSerilog(log);
+                    builder
+                    .ClearProviders()
+                    .AddSerilog(log);
                 })
 
                 // register services
